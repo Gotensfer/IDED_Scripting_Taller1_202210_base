@@ -1,8 +1,8 @@
-# Taller1_base
+# Taller1
 Parcial 1 Scripting IDED UPB 202210
  
  Trabajo realizado por:
 
  Camilo Correa Rojas 000418856
 
- Juan Fernando López Rodríguez 000424386
+ Juan Fernando LÃ³pez RodrÃ­guez 000424386
