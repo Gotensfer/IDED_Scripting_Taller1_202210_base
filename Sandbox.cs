@@ -16,65 +16,41 @@ namespace TestProject1
 
         public static void Main(string[] args)
         {
+            Dictionary<int, EValueType> dic = new Dictionary<int, EValueType>();
+            dic.Add(2, EValueType.Two);
+            dic.Add(8, EValueType.Two);
+            dic.Add(6, EValueType.Two);
+            dic.Add(5, EValueType.Five);
+            dic.Add(7, EValueType.Seven);
 
-            /*
-            int testNumber = 811;
+            int[] keys = new int[dic.Count];
+            dic.Keys.CopyTo(keys, 0);
 
-            Console.WriteLine("Number: " + testNumber);
-            Console.WriteLine("Is even: " + isEven(testNumber));
-            Console.WriteLine("Is multiple of three: " + isMultipleOfThree(testNumber));
-            Console.WriteLine("Is multiple of five: " + isMultipleOfFive(testNumber));
-            Console.WriteLine("Is multiple of seven: " + isMultipleOfSeven(testNumber));
-            Console.WriteLine("Is prime: " + isPrime(testNumber));
-            */
+            EValueType[] values = new EValueType[dic.Count];
+            dic.Values.CopyTo(values, 0);
 
-            int[] arr = { 2, 5, 8, 2 };
-            int[] arr2 = new int[arr.Length];
-            arr.CopyTo(arr2, 0);
+            //Bubble sort
 
+            for (int i = 0; i < keys.Length; i++)
+            {                
+                for (int k = 0; k < keys.Length - 1; k++)
+                {
+                    int nextElement = keys[k + 1];
 
-        }
-
-        /*
-        static bool isEven(int number)
-        {
-            if (number % 2 == 0) return true;
-            else return false;
-
-        }
-
-        static bool isMultipleOfThree(int number)
-        {
-            if (number % 3 == 0) return true;
-            else return false;
-            
-        }
-
-        static bool isMultipleOfFive(int number)
-        {
-            if (number % 5 == 0) return true;
-            else return false;
-        }
-
-        static bool isMultipleOfSeven(int number)
-        {
-            if (number % 7 == 0) return true;
-            else return false;
-        }
-
-        
-        static bool isPrime(int number)
-        {
-            int dividers = 0;
-
-            for (int i = 2; i < 10; i++)
-            {
-                if (number % i == 0) dividers++;
-                if (dividers > 1) return false;
+                    if (keys[k] < nextElement)
+                    {
+                        keys[k + 1] = keys[k];
+                        keys[k] = nextElement;
+                    }
+                }
             }
 
-            return true;
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                Console.WriteLine(keys[i]);
+            }
+
         }
-        */
     }
 }

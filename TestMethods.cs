@@ -75,12 +75,51 @@ namespace TestProject1
 
         internal static int CountDictionaryRegistriesWithValueType(Dictionary<int, EValueType> sourceDict, EValueType type)
         {
-            return 0;
+            int result = 0;
+
+            int[] keys = new int[sourceDict.Count];
+            sourceDict.Keys.CopyTo(keys, 0);
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (sourceDict[keys[i]] == type) result++;
+            }
+
+            return result;
         }
 
         internal static Dictionary<int, EValueType> SortDictionaryRegistries(Dictionary<int, EValueType> sourceDict)
         {
-            Dictionary<int, EValueType> result = null;
+            Dictionary<int, EValueType> result = new Dictionary<int, EValueType>();
+
+            int[] keys = new int[sourceDict.Count];
+            sourceDict.Keys.CopyTo(keys, 0);
+
+            EValueType[] values = new EValueType[sourceDict.Count];
+            sourceDict.Values.CopyTo(values, 0);
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                for (int k = 0; k < keys.Length - 1; k++)
+                {
+                    int nextKey = keys[k + 1];
+                    EValueType nextValue = values[k + 1];
+
+                    if (keys[k] < nextKey)
+                    {
+                        keys[k + 1] = keys[k];
+                        keys[k] = nextKey;
+
+                        values[k + 1] = values[k];
+                        values[k] = nextValue;
+                    }
+                }
+            }
+
+            for (int i = 0; i < keys.Length; i++)
+            {
+                result.Add(keys[i], values[i]);
+            }
 
             return result;
         }
