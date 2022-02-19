@@ -55,7 +55,20 @@ namespace TestProject1
 
         internal static Dictionary<int, EValueType> FillDictionaryFromSource(int[] sourceArr)
         {
-            Dictionary<int, EValueType> result = null;
+            Dictionary<int, EValueType> result = new Dictionary<int, EValueType>();
+
+
+            int[] copy = new int[sourceArr.Length];
+            sourceArr.CopyTo(copy, 0);
+
+            for (int i = 0; i < copy.Length; i++)
+            {
+                if (copy[i] % 2 == 0) result.Add(copy[i], EValueType.Two);
+                else if (copy[i] % 3 == 0) result.Add(copy[i], EValueType.Three);
+                else if (copy[i] % 5 == 0) result.Add(copy[i], EValueType.Five);
+                else if (copy[i] % 7 == 0) result.Add(copy[i], EValueType.Seven);
+                else result.Add(copy[i], EValueType.Prime);
+            }
 
             return result;
         }

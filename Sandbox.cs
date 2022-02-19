@@ -5,78 +5,76 @@ namespace TestProject1
 {
     internal class Sandbox
     {
+        enum EValueType
+        {
+            Two,
+            Three,
+            Five,
+            Seven,
+            Prime
+        }
+
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello world");
-            Console.WriteLine("Here you can write console prints to test your implementation outside the testing environment");
-        
-            Stack<int> sc = new Stack<int>();
-            sc.Push(14);
-            sc.Push(8);
-            sc.Push(7);
-            sc.Push(13);
 
-            outResult(sc);
-            sc.Clear();
-            Console.WriteLine(sc.Count);
+            /*
+            int testNumber = 811;
 
-            sc.Push(26);
-            sc.Push(3);
-            sc.Push(6);
-            sc.Push(5);
+            Console.WriteLine("Number: " + testNumber);
+            Console.WriteLine("Is even: " + isEven(testNumber));
+            Console.WriteLine("Is multiple of three: " + isMultipleOfThree(testNumber));
+            Console.WriteLine("Is multiple of five: " + isMultipleOfFive(testNumber));
+            Console.WriteLine("Is multiple of seven: " + isMultipleOfSeven(testNumber));
+            Console.WriteLine("Is prime: " + isPrime(testNumber));
+            */
 
-            outResult(sc);
+            int[] arr = { 2, 5, 8, 2 };
+            int[] arr2 = new int[arr.Length];
+            arr.CopyTo(arr2, 0);
 
 
         }
-        
-        static Stack<int> outResult (Stack<int> sourceStack)
+
+        /*
+        static bool isEven(int number)
         {
+            if (number % 2 == 0) return true;
+            else return false;
 
-            int[] arrayOfSourceStack = sourceStack.ToArray();
-            Stack<int> copyStack = new Stack<int>();
-
-            for (int i = arrayOfSourceStack.Length - 1; i >= 0; i--)
-            {
-                copyStack.Push(arrayOfSourceStack[i]);
-            }
-
-            Stack<int> result = new Stack<int>();
-            List<int> outs = new List<int>();
-            List<int> readyResults = new List<int>();
-
-            //--
-
-            while (copyStack.Count > 0)
-            {
-                int element = copyStack.Pop();
-                Console.WriteLine(element);
-
-                outs.Add(element);
-
-                int biggerElement = element;
-
-                for (int i = 0; i < outs.Count; i++)
-                {
-                    if (outs[i] > biggerElement) biggerElement = outs[i];
-                }
-
-                if (biggerElement == element) readyResults.Add(-1);
-                else readyResults.Add(biggerElement);
-            }
-
-            for (int i = readyResults.Count - 1; i >= 0; i--)
-            {
-                result.Push(readyResults[i]);
-            }
-
-            
-            while (result.Count > 0)
-            {
-                Console.WriteLine(result.Pop());
-            }
-
-            return result;
         }
+
+        static bool isMultipleOfThree(int number)
+        {
+            if (number % 3 == 0) return true;
+            else return false;
+            
+        }
+
+        static bool isMultipleOfFive(int number)
+        {
+            if (number % 5 == 0) return true;
+            else return false;
+        }
+
+        static bool isMultipleOfSeven(int number)
+        {
+            if (number % 7 == 0) return true;
+            else return false;
+        }
+
+        
+        static bool isPrime(int number)
+        {
+            int dividers = 0;
+
+            for (int i = 2; i < 10; i++)
+            {
+                if (number % i == 0) dividers++;
+                if (dividers > 1) return false;
+            }
+
+            return true;
+        }
+        */
     }
 }
