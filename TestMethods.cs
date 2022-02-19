@@ -126,7 +126,41 @@ namespace TestProject1
 
         internal static Queue<Ticket>[] ClassifyTickets(List<Ticket> sourceList)
         {
-            Queue<Ticket>[] result = null;
+            Queue<Ticket>[] result = new Queue<Ticket>[3];
+
+            Ticket[] copy = new Ticket[sourceList.Count];
+
+            Queue<Ticket> paymentQueue = new Queue<Ticket>();
+            Queue<Ticket> subscriptionQueue = new Queue<Ticket>();
+            Queue<Ticket> cancellationQueue = new Queue<Ticket>();
+
+            sourceList.CopyTo(copy, 0);
+
+            for (int i = 0; i < copy.Length; i++)
+            {
+                for (int k = 0; k < copy.Length - 1; k++)
+                {
+                    int nextTurn = copy[k + 1].Turn;
+                    Ticket nextTicket = copy[k + 1];
+
+                    if (copy[k].Turn > nextTurn)
+                    {
+                        copy[k + 1] = copy[k];
+                        copy[k] = nextTicket;
+                    }
+                }
+            }
+
+            for (int i = 0; i < copy.Length; i++)
+            {
+                if (copy[i].RequestType == Ticket.ERequestType.Payment) paymentQueue.Enqueue(copy[i]);
+                if (copy[i].RequestType == Ticket.ERequestType.Subscription) subscriptionQueue.Enqueue(copy[i]);
+                if (copy[i].RequestType == Ticket.ERequestType.Cancellation) cancellationQueue.Enqueue(copy[i]);
+            }
+
+            result[0] = paymentQueue;
+            result[1] = subscriptionQueue;
+            result[2] = cancellationQueue;
 
             return result;
         }
@@ -134,6 +168,10 @@ namespace TestProject1
         internal static bool AddNewTicket(Queue<Ticket> targetQueue, Ticket ticket)
         {
             bool result = false;
+
+            Ticket.ERequestType typeOfTicketQueue = targetQueue.Peek().RequestType;
+
+            if (ticket.RequestType == typeOfTicketQueue && ticket.Turn > 0 && ticket.Turn < 100) result = true;
 
             return result;
         }        
